@@ -13,7 +13,7 @@ export default class DucoCommunicationPrintApi implements DucoApi {
     httpClient: HttpClient
 
     constructor(homey: Homey, ducoBox: DucoBox) {
-        this.httpClient = new HttpClient(homey, ducoBox);
+        this.httpClient = new HttpClient(homey, ducoBox.hostname, ducoBox.useHttps);
     }
 
     async getNodes() : Promise<NodeInterface[]> {

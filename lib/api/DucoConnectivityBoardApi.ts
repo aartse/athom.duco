@@ -12,7 +12,7 @@ export default class DucoConnectivityBoardApi implements DucoApi {
     httpClient: HttpClient
 
     constructor(homey: Homey, ducoBox: DucoBox) {
-        this.httpClient = new HttpClient(homey, ducoBox);
+        this.httpClient = new HttpClient(homey, ducoBox.hostname, ducoBox.useHttps);
     }
 
     getNodes() : Promise <NodeInterface[]> {

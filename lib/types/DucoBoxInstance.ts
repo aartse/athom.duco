@@ -1,4 +1,4 @@
-import { Homey } from "homey/lib/Device";
+import Homey from 'homey/lib/Homey';
 import DucoBox from "./DucoBox";
 import DucoApi from "../api/types/DucoApi";
 import DucoCommunicationPrintApi from "../api/DucoCommunicationPrintApi";

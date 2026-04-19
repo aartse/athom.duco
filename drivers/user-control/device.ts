@@ -3,13 +3,8 @@ import NodeInterface from '../../lib/api/types/NodeInterface';
 import DucoBoxCapabilityValues from '../../lib/types/DucoBoxCapabilityValues';
 import FlowHelper from '../../lib/FlowHelper';
 import NodeActionEnum from '../../lib/api/types/NodeActionEnum';
-import UpdateListener from '../../lib/UpdateListner';
-import DucoApiFactory from '../../lib/api/DucoApiFactory';
 
 class UserControlDevice extends DucoDevice {
-  async onInit() {
-    await this.initCapabilities();
-  }
 
   async initCapabilities() {
     if (!this.hasCapability('ventilation_state')) {
@@ -25,7 +20,7 @@ class UserControlDevice extends DucoDevice {
     this.registerCapabilityListener('ventilation_state', (value) => {
       this.homey.log(`ventilation_state capability has been changed to ${value}`);
 
-      return DucoApiFactory.create(this.homey).postNodeAction(this.getData().id, {
+      return this.postNodeAction({
         Action: NodeActionEnum.SetVentilationState,
         Val: value
       }).then(() => {
@@ -36,8 +31,7 @@ class UserControlDevice extends DucoDevice {
           new_value: value,
         });
 
-        // restart listener with a timeout to make sure the has updated the values
-        UpdateListener.create(this.homey).startListener(10000);
+        this.updateNode();
       });
     });
   }

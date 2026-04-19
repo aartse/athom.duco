@@ -1,5 +1,7 @@
 'use strict';
 
+import DucoDevice from "./homey/DucoDevice";
+
 export default class NodeHelper {
 
     static getDriverIdsForNodeType(type: string) : string[] {

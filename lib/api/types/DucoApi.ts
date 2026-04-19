@@ -6,5 +6,4 @@ import PostNodeAction from './PostNodeAction';
 export default interface DucoApi {
     getNodes() : Promise <NodeInterface[]>;
     postNodeAction(nodeId: number, postData: PostNodeAction) : Promise<any>;
-    destroy() : void;
 }

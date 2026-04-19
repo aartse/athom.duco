@@ -3,45 +3,29 @@
 import Homey from 'homey/lib/Homey';
 import https from 'https';
 import http from 'http';
+import DucoBox from '../types/DucoBox';
 
 export default class HttpClient {
 
-    homey: Homey
-    hostname!: string;
-    useHttps: boolean;
+    homey: Homey;
+    ducoBox: DucoBox;
 
-    constructor(homey: Homey) {
+    constructor(homey: Homey, ducoBox: DucoBox) {
         this.homey = homey;
-
-        this.homey.settings.on('set', this.onSettingsChange.bind(this));
-        this.hostname = this.homey.settings.get('hostname');
-        this.useHttps = this.homey.settings.get('useHttps');
-    }
-
-    destroy() : void {
-        this.homey.settings.off('set', this.onSettingsChange);
-    }
-
-    onSettingsChange (field: any) : void {
-        if ('hostname' === field) {
-            this.hostname = this.homey.settings.get('hostname');
-        }
-        if ('useHttps' === field) {
-            this.useHttps = this.homey.settings.get('useHttps');
-        }
+        this.ducoBox = ducoBox;
     }
 
     get(path: string) : Promise <string> {
         return new Promise((resolve, reject) => {
-            if (!this.hostname) {
+            if (!this.ducoBox.hostname) {
                 return reject(new Error(this.homey.__('error.hostname_not_set')));
             }
 
             const homey = this.homey;
             const options = {
                 method: 'GET',
-                hostname: this.hostname,
-                port: this.useHttps ? 443 : 80,
+                hostname: this.ducoBox.hostname,
+                port: this.ducoBox.useHttps ? 443 : 80,
                 path: path,
                 headers: {
                     'Accept': '*/*',
@@ -51,9 +35,9 @@ export default class HttpClient {
                 timeout: 9000,
             };
 
-            homey.log(`sending GET request to "${this.useHttps ? 'https' : 'http'}://${options.hostname}${options.path}"`);
+            homey.log(`sending GET request to "${this.ducoBox.useHttps ? 'https' : 'http'}://${options.hostname}${options.path}"`);
 
-            const httpClient = this.useHttps ? https : http;
+            const httpClient = this.ducoBox.useHttps ? https : http;
             const req = httpClient.request(options, res => {
                 homey.log(`http status code: ${res.statusCode}`);
 
@@ -91,7 +75,7 @@ export default class HttpClient {
 
     post(path: string, postData: any) : Promise <string> {
         return new Promise((resolve, reject) => {
-            if (!this.hostname) {
+            if (!this.ducoBox.hostname) {
                 return reject(new Error(this.homey.__('error.hostname_not_set')));
             }
 
@@ -99,8 +83,8 @@ export default class HttpClient {
             const body = JSON.stringify(postData);
             const options = {
                 method: 'POST',
-                hostname: this.hostname,
-                port: this.useHttps ? 443 : 80,
+                hostname: this.ducoBox.hostname,
+                port: this.ducoBox.useHttps ? 443 : 80,
                 path: path,
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
@@ -112,10 +96,10 @@ export default class HttpClient {
                 timeout: 9000,
             };
 
-            homey.log(`sending POST request to "${this.useHttps ? 'https' : 'http'}://${options.hostname}${options.path}"`);
+            homey.log(`sending POST request to "${this.ducoBox.useHttps ? 'https' : 'http'}://${options.hostname}${options.path}"`);
             homey.log(`body: "${body}"`);
 
-            const httpClient = this.useHttps ? https : http;
+            const httpClient = this.ducoBox.useHttps ? https : http;
             const req = httpClient.request(options, res => {
                 homey.log(`http status code: ${res.statusCode}`);
 

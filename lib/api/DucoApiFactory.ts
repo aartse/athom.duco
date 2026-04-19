@@ -7,6 +7,9 @@ import DucoConnectivityBoardApi from './DucoConnectivityBoardApi';
 
 let ducoApi: DucoApi|null = null;
 
+/**
+ * TODO: REMOVE THIS FILE WHEN PAIRING IS REFACTORED!
+ */
 export default class DucoApiFactory {
     static create(homey: Homey): DucoApi {
       if (!ducoApi) {
@@ -15,17 +18,22 @@ export default class DucoApiFactory {
         homey.log('using API "'+apiType+'"');
 
         ducoApi = 'communication_print' === apiType
-          ? new DucoCommunicationPrintApi(homey)
-          : new DucoConnectivityBoardApi(homey);
+          ? new DucoCommunicationPrintApi(homey,{
+                id: 0,
+                name: 'DucoBox',
+                hostname: homey.settings.get('hostname'),
+                useHttps: homey.settings.get('useHttps') === null || homey.settings.get('useHttps') === true,
+                apiType: homey.settings.get('apiType') || 'connectivity_board'
+            })
+          : new DucoConnectivityBoardApi(homey,{
+                id: 0,
+                name: 'DucoBox',
+                hostname: homey.settings.get('hostname'),
+                useHttps: homey.settings.get('useHttps') === null || homey.settings.get('useHttps') === true,
+                apiType: homey.settings.get('apiType') || 'connectivity_board'
+            });
       }
 
       return ducoApi;
-    }
-
-    static destroy() {
-      if (ducoApi) {
-        ducoApi.destroy();
-      }
-      ducoApi = null;
     }
 }

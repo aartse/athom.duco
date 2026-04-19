@@ -62,25 +62,10 @@ export default class DiscoveryService {
         // load existing duco boxes and add this result to it
         var discoveredDucoBoxes = this.homey.settings.get('discoveredDucoBoxes');
         if (!(discoveredDucoBoxes instanceof Array)) {
-            discoveredDucoBoxes = []
+            discoveredDucoBoxes = [];
         }
         discoveredDucoBoxes.push(discoveryResult);
         this.homey.settings.set('discoveredDucoBoxes', discoveredDucoBoxes);
-
-        // save the first result as hostname when no hostname is set and the result address is valid
-        if (!this.homey.settings.get('hostname')) {
-            if (discoveryResult.host && discoveryResult.host !== '127.0.0.1' && discoveryResult.host !== '0.0.0.0') {
-                this.homey.settings.set('hostname', discoveryResult.host);
-                this.homey.settings.set('useHttps', parseInt(discoveryResult.port) === 80 ? 'http' : 'https');
-                
-                this.homey.log('Hostname in settings is empty, hostname set from discovery host to '+discoveryResult.host);
-            } else if (discoveryResult.address && discoveryResult.address !== '127.0.0.1' && discoveryResult.address !== '0.0.0.0') {
-                this.homey.settings.set('hostname', discoveryResult.address);
-                this.homey.settings.set('useHttps', parseInt(discoveryResult.port) === 80 ? 'http' : 'https');
-                
-                this.homey.log('Hostname in settings is empty, hostname set from discovery address to '+discoveryResult.address);
-            }
-        }
 
         this.homey.log('Device added to the discovered duco boxes list, current number of boxes: '+discoveredDucoBoxes.length);
     }

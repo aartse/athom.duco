@@ -1,6 +1,5 @@
 import NodeHelper from '../../lib/NodeHelper';
 import DucoDriver from '../../lib/homey/DucoDriver';
-import UpdateListener from '../../lib/UpdateListner';
 import NodeActionEnum from '../../lib/api/types/NodeActionEnum';
 import DucoApiFactory from '../../lib/api/DucoApiFactory';
 
@@ -9,7 +8,7 @@ class CO2RoomSensorDriver extends DucoDriver {
     // init action card
     const changeVentilationStateAction = this.homey.flow.getActionCard('co2-room-sensor__change_ventilation_state');
     changeVentilationStateAction.registerRunListener((args, state) => {
-      return DucoApiFactory.create(this.homey).postNodeAction(args.device.getData().id, {
+      return args.device.postNodeAction({
         Action: NodeActionEnum.SetVentilationState,
         Val: args.ventilation_state
       }).then(() => {
@@ -22,9 +21,7 @@ class CO2RoomSensorDriver extends DucoDriver {
 
         // update capability value
         args.device.setCapabilityValue('ventilation_state', args.ventilation_state);
-
-        // restart listener with a timeout to make sure the has updated the values
-        UpdateListener.create(this.homey).startListener(10000);
+        args.device.updateNode();
       });
     });
     

@@ -5,17 +5,14 @@ import NodeInterface from './types/NodeInterface';
 import PostNodeAction from './types/PostNodeAction';
 import HttpClient from './HttpClient';
 import DucoApi from './types/DucoApi';
+import DucoBox from '../types/DucoBox';
 
 export default class DucoConnectivityBoardApi implements DucoApi {
 
     httpClient: HttpClient
 
-    constructor(homey: Homey) {
-        this.httpClient = new HttpClient(homey);
-    }
-
-    destroy() : void {
-        this.httpClient.destroy();
+    constructor(homey: Homey, ducoBox: DucoBox) {
+        this.httpClient = new HttpClient(homey, ducoBox);
     }
 
     getNodes() : Promise <NodeInterface[]> {

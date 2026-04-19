@@ -4,9 +4,6 @@ import DucoBoxCapabilityValues from '../../lib/types/DucoBoxCapabilityValues';
 import FlowHelper from '../../lib/FlowHelper';
 
 class CO2BoxSensorDevice extends DucoDevice {
-  async onInit() {
-    await this.initCapabilities();
-  }
 
   async initCapabilities() {
     if (!this.hasCapability('measure_co2')) {

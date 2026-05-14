@@ -34,21 +34,13 @@
       ducoBoxElement.querySelector("[data-template-device-url]").textContent = (ducoBox.useHttps ? 'https://' : 'http://') + ducoBox.hostname;
       ducoBoxElement.querySelector("input").checked = (index === 0);
       ducoBoxElement.querySelector("input").addEventListener('click', function() {
-        console.log(ducoBox);
         Homey.emit('selected_ducobox', ducoBox);
       });
 
       listSelectDucoBox.appendChild(ducoBoxElement);
     });
 
+    // send (first) selected ducobox to back-end
     listSelectDucoBox.querySelector('input:checked').dispatchEvent(new Event('click'));
-
-/*
-    if (result.length === 1) {
-      Homey.emit('selected_ducobox', result[0]).then(function() {
-        Homey.nextView();
-      });
-    }
-*/
   });
 </script>

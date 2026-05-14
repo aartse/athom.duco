@@ -14,6 +14,12 @@
         "cancel": "Cancel",
         "saved": "Settings saved"
     },
+    "pair": {
+        "list_ducoboxes": {
+            "title": "Select a ducobox",
+            "subtitle": "If the ducobox is not listed, add it via the app's settings"
+        }
+    },
     "error": {
         "hostname_not_set": "The DucoBox's IP is not set in the app settings"
     }

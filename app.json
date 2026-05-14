@@ -4933,6 +4933,25 @@
   },
   "drivers": [
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "CO2 Box sensor",
         "nl": "CO2 Boxsensor"
@@ -4954,22 +4973,28 @@
         "large": "/drivers/co2-box-sensor/assets/images/large.png",
         "xlarge": "/drivers/co2-box-sensor/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "co2-box-sensor"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "CO2 and Humidity Valve",
         "nl": "Regelklep met vocht- en co2-sensor"
@@ -5000,22 +5025,28 @@
         "large": "/drivers/co2-humidity-valve/assets/images/large.png",
         "xlarge": "/drivers/co2-humidity-valve/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "co2-humidity-valve"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "CO2 Room sensor",
         "nl": "CO2 Ruimtesensor"
@@ -5040,22 +5071,28 @@
         "large": "/drivers/co2-room-sensor/assets/images/large.png",
         "xlarge": "/drivers/co2-room-sensor/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "co2-room-sensor"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "CO2 Valve",
         "nl": "Regelklep met CO2 Sensor"
@@ -5083,22 +5120,28 @@
         "large": "/drivers/co2-valve/assets/images/large.png",
         "xlarge": "/drivers/co2-valve/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "co2-valve"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "DucoBox Focus",
         "nl": "DucoBox Focus"
@@ -5123,22 +5166,28 @@
         "large": "/drivers/ducobox-focus/assets/images/large.png",
         "xlarge": "/drivers/ducobox-focus/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "ducobox-focus"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "DucoBox Silent Connect",
         "nl": "DucoBox Silent Connect"
@@ -5169,22 +5218,28 @@
         "large": "/drivers/ducobox-silent-connect/assets/images/large.png",
         "xlarge": "/drivers/ducobox-silent-connect/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "ducobox-silent-connect"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "Humidity Box sensor",
         "nl": "Vocht Boxsensor"
@@ -5206,22 +5261,28 @@
         "large": "/drivers/humidity-box-sensor/assets/images/large.png",
         "xlarge": "/drivers/humidity-box-sensor/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "humidity-box-sensor"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "Humidity Room sensor",
         "nl": "Vocht Ruimtesensor"
@@ -5246,22 +5307,28 @@
         "large": "/drivers/humidity-room-sensor/assets/images/large.png",
         "xlarge": "/drivers/humidity-room-sensor/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "humidity-room-sensor"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "Humidity Valve",
         "nl": "Regelklep met vochtsensor"
@@ -5289,22 +5356,28 @@
         "large": "/drivers/humidity-valve/assets/images/large.png",
         "xlarge": "/drivers/humidity-valve/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "humidity-valve"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "User Control",
         "nl": "Afstandsbediening"
@@ -5326,22 +5399,28 @@
         "large": "/drivers/user-control/assets/images/large.png",
         "xlarge": "/drivers/user-control/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "user-control"
     },
     {
+      "pair": [
+        {
+          "id": "list_ducoboxes",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_device"
+          }
+        },
+        {
+          "id": "add_device",
+          "template": "add_devices"
+        }
+      ],
       "name": {
         "en": "Valve",
         "nl": "Regelklep"
@@ -5366,19 +5445,6 @@
         "large": "/drivers/valve/assets/images/large.png",
         "xlarge": "/drivers/valve/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_my_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
-        }
-      ],
       "id": "valve"
     }
   ],

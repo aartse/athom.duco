@@ -1,0 +1,18 @@
+{
+  "pair": [
+    {
+      "id": "list_ducoboxes",
+      "$template": "list_ducoboxes",
+      "navigation": { "next": "list_devices" }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": { "next": "add_device" }
+    },
+    {
+      "id": "add_device",
+      "template": "add_devices"
+    }
+  ]
+}

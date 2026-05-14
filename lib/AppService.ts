@@ -4,7 +4,6 @@ import Homey from 'homey/lib/Homey';
 import SettingsService from './SettingsService';
 import DucoBoxInstance from './types/DucoBoxInstance';
 import DucoBox from './types/DucoBox';
-import DucoDevice from './homey/DucoDevice';
 import DucoApi from './api/types/DucoApi';
 
 let appService: AppService|null = null;

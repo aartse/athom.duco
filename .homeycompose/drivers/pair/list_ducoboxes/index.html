@@ -1,0 +1,46 @@
+<hr />
+
+<div>
+  <div class="homey-form-group">
+    <fieldset class="homey-form-radio-set" id="list-select-ducobox">
+    </fieldset>
+  </div>
+</div>
+
+<template id="template-select-ducobox">
+  <label class="homey-form-radio">
+    <input class="homey-form-radio-input" type="radio"/>
+    <span class="homey-form-radio-checkmark"></span>
+    <span class="homey-form-radio-text">
+      <div style="width:100%">
+        <div><span data-template-device-name="" style="font-weight:bold;"></span></div>
+        <div data-template-device-url=""></div>
+      </div>
+    </span>
+  </label>
+</template>
+
+<script type="application/javascript">
+  Homey.setTitle(Homey.__("pair.list_ducoboxes.title"));
+  Homey.setSubtitle(Homey.__("pair.list_ducoboxes.subtitle"));
+
+  const selectDucoBoxTemplate = document.getElementById("template-select-ducobox");
+  const listSelectDucoBox = document.getElementById("list-select-ducobox");
+
+  Homey.emit("list_ducoboxes", null).then(function (ducoBoxes) {
+    ducoBoxes.forEach((ducoBox, index) => {
+      const ducoBoxElement = selectDucoBoxTemplate.content.cloneNode(true);
+      ducoBoxElement.querySelector("[data-template-device-name]").textContent = ducoBox.name;
+      ducoBoxElement.querySelector("[data-template-device-url]").textContent = (ducoBox.useHttps ? 'https://' : 'http://') + ducoBox.hostname;
+      ducoBoxElement.querySelector("input").checked = (index === 0);
+      ducoBoxElement.querySelector("input").addEventListener('click', function() {
+        Homey.emit('selected_ducobox', ducoBox);
+      });
+
+      listSelectDucoBox.appendChild(ducoBoxElement);
+    });
+
+    // send (first) selected ducobox to back-end
+    listSelectDucoBox.querySelector('input:checked').dispatchEvent(new Event('click'));
+  });
+</script>

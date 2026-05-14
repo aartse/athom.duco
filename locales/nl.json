@@ -14,6 +14,12 @@
         "cancel": "Annuleren",
         "saved": "Instellingen zijn opgeslagen"
     },
+    "pair": {
+        "list_ducoboxes": {
+            "title": "Selecteer een ducobox",
+            "subtitle": "Staat de ducobox er niet tussen, voeg hem dan toe via de instellingen van de app"
+        }
+    },
     "error": {
         "hostname_not_set": "IP van de DucoBox is niet ingeseld in de instellingen van de app"
     }

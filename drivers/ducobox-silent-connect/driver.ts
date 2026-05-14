@@ -1,7 +1,5 @@
-import NodeHelper from '../../lib/NodeHelper';
 import DucoDriver from '../../lib/homey/DucoDriver';
 import NodeActionEnum from '../../lib/api/types/NodeActionEnum';
-import DucoApiFactory from '../../lib/api/DucoApiFactory';
 
 class DucoboxSilentConnectDriver extends DucoDriver {
   async onInit() {
@@ -33,21 +31,6 @@ class DucoboxSilentConnectDriver extends DucoDriver {
     const ventilationModeCondition = this.homey.flow.getConditionCard('ducobox-silent-connect__ventilation_mode_is');
     ventilationModeCondition.registerRunListener((args, state) => {
       return args.device.getCapabilityValue('ventilation_mode') === args.mode;
-    });
-  }
-
-  async onPairListDevices() {
-    // get nodes and filter the nodes that can be handled by this driver
-    const nodes = (await DucoApiFactory.create(this.homey).getNodes()).filter(node => NodeHelper.isMappedForDriver(node.General.Type.Val, 'ducobox-silent-connect'));
-
-    // convert each node to a homey device
-    return nodes.map(node => {
-      return {
-        name: node.General.Name.Val || 'Node ' + node.Node,
-        data: {
-          id: node.Node
-        }
-      }
     });
   }
 }

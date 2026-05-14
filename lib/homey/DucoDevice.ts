@@ -3,6 +3,7 @@ import Homey from 'homey';
 import AppService from "../AppService";
 import DucoApi from "../api/types/DucoApi";
 import PostNodeAction from "../api/types/PostNodeAction";
+import NodeHelper from "../NodeHelper";
 
 export default class DucoDevice extends Homey.Device {
     updateByNode(node: NodeInterface): void {
@@ -31,21 +32,11 @@ export default class DucoDevice extends Homey.Device {
     }
 
     getDucoNodeId(): number {
-        const id = String(this.getData()['id']);
-        if (id.indexOf('_') === -1) {
-            return parseInt(id);
-        }
-
-        return parseInt(id.split('_')[1]);
+        return NodeHelper.getDucoNodeId(String(this.getData()['id']));
     }
 
     getDucoBoxId(): number {
-        const id = String(this.getData()['id']);
-        if (id.indexOf('_') === -1) {
-            return 0;
-        }
-
-        return parseInt(id.split('_')[0]);
+        return NodeHelper.getDucoBoxId(String(this.getData()['id']));
     }
 
     postNodeAction(postData: PostNodeAction) : Promise<any> {

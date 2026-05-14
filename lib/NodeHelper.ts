@@ -34,4 +34,28 @@ export default class NodeHelper {
     static isMappedForDriver(type: string, driver: string) : boolean {
         return this.getDriverIdsForNodeType(type).indexOf(driver) !== -1;
     }
+
+    static getDucoNodeId(deviceId: string): number {
+        if (deviceId.indexOf('_') === -1) {
+            return parseInt(deviceId);
+        }
+
+        return parseInt(deviceId.split('_')[1]);
+    }
+
+    static getDucoBoxId(deviceId: string): number {
+        if (deviceId.indexOf('_') === -1) {
+            return 0;
+        }
+
+        return parseInt(deviceId.split('_')[0]);
+    }
+
+    static getDeviceId(ducoBoxId: number, node: number): string|number {
+        if (ducoBoxId === 0) {
+            return node;
+        }
+
+        return ducoBoxId+'_'+node;
+    }
 }

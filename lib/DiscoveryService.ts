@@ -48,6 +48,15 @@ export default class DiscoveryService {
         }
     }
 
+    getDiscoveredDevices() {
+        var discoveredDucoBoxes = this.homey.settings.get('discoveredDucoBoxes');
+        if (!(discoveredDucoBoxes instanceof Array)) {
+            discoveredDucoBoxes = [];
+        }
+
+        return discoveredDucoBoxes;
+    }
+
     handleDiscoveryResult(discoveryResult: DiscoveryResultMDNSSD) {
         this.homey.log('Discovered a MMDNSSD Device:');
         this.homey.log(discoveryResult);

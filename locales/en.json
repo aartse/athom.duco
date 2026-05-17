@@ -1,26 +1,43 @@
 {
     "settings": {
-        "title": "App settings",
-        "hostname": "IP / Hostname DucoBox",
-        "hostname_hint": "This is the IP address of the Connectivity Board on your local network.",
-        "use_https": "Use https",
-        "use_communication_print_api": "Use communication print api",
-        "nothing_found": "Nothing found.",
-        "name": "Name",
-        "url": "URL",
-        "select": "Select",
-        "save": "Save",
-        "search": "Search for DucoBox",
-        "cancel": "Cancel",
-        "saved": "Settings saved"
+        "main_view": {
+            "title": "DucoBoxes",
+            "subtitle": "Below are the configured DucoBoxes",
+            "loading": "Loading...",
+            "no_ducoboxes": "No DucoBoxes have been configured. Click “Search” or manually add a DucoBox.",
+            "name": "Name",
+            "url": "URL",
+            "edit": "Edit",
+            "manual_add": "Add manually",
+            "search": "Search for DucoBox"
+        },
+        "edit_view": {
+            "title": "Add or edit a DucoBox",
+            "subtitle": "",
+            "api_type": "API",
+            "name": "Name",
+            "hostname": "IP / Hostname DucoBox",
+            "hostname_hint": "This is the IP address of the Connectivity Board on your local network.",
+            "use_https": "Use https",
+            "use_communication_print_api": "Use communication print api",
+            "save": "Save",
+            "cancel": "Cancel",
+            "remove": "Remove"
+        },
+        "search_view": {
+            "title": "Search for a DucoBox",
+            "subtitle": "Below are the DucoBoxes found on the network. If a DucoBox cannot be found, go back and add the box manually.",
+            "name": "Name",
+            "url": "URL",
+            "select": "Select",
+            "nothing_found": "Nothing found.",
+            "cancel": "Cancel"
+        }
     },
     "pair": {
         "list_ducoboxes": {
             "title": "Select a ducobox",
             "subtitle": "If the ducobox is not listed, add it via the app's settings"
         }
-    },
-    "error": {
-        "hostname_not_set": "The DucoBox's IP is not set in the app settings"
     }
 }

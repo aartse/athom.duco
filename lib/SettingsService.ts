@@ -2,6 +2,8 @@
 
 import Homey from 'homey/lib/Homey';
 import DucoBox from './types/DucoBox';
+import assert from "node:assert";
+import DucoBoxApiTypeEnum from './types/DucoBoxApiTypeEnum';
 
 let settingsService: SettingsService|null = null;
 
@@ -31,13 +33,20 @@ export default class SettingsService {
         // migrate old settings to a ducoBox
         if (this.homey.settings.get('hostname')) {
             this.homey.log('migrating old settings to ducoBox 0');
-            this.saveDucoBox({
+            const ducoBox = {
                 id: 0,
                 name: 'DucoBox',
                 hostname: this.homey.settings.get('hostname'),
                 useHttps: this.homey.settings.get('useHttps') === null || this.homey.settings.get('useHttps') === true,
-                apiType: this.homey.settings.get('apiType') || 'connectivity_board'
-            });
+                apiType: this.homey.settings.get('apiType') || DucoBoxApiTypeEnum.connectivity_board
+            };
+
+            // fix invalid apiType
+            if (Object.values(DucoBoxApiTypeEnum).indexOf(ducoBox.apiType) === -1) {
+                ducoBox.apiType = DucoBoxApiTypeEnum.connectivity_board;
+            }
+
+            this.saveDucoBox(ducoBox);
 
             // clear old values
             this.homey.settings.set('hostname', null);
@@ -94,6 +103,19 @@ export default class SettingsService {
             return existingDucoBox.id === ducoBox.id;
         });
 
+        // validate types
+        assert(typeof ducoBox.id === "number" && !isNaN(ducoBox.id), "id should be a number");
+        assert(typeof ducoBox.name === "string", "name should be a string");
+        assert(typeof ducoBox.hostname === "string", "hostname should be a string");
+        assert(typeof ducoBox.apiType === "string", "apiType should be a string");
+        assert(typeof ducoBox.useHttps === "boolean", "useHttps should be a boolean");
+
+        // validate values
+        assert(ducoBox.id >= 0, "id should not be negative");
+        assert(ducoBox.name.trim() !== "", "name should not be empty");
+        assert(ducoBox.hostname.trim() !== "", "hostname should not be empty");
+        assert(Object.values(DucoBoxApiTypeEnum).indexOf(ducoBox.apiType) !== -1, "invalid apiType, should be one of "+Object.values(DucoBoxApiTypeEnum).join(','));
+
         // add or update the list with ducoBoxes
         if (i !== -1) {
             ducoBoxes[i] = ducoBox;
@@ -111,7 +133,7 @@ export default class SettingsService {
         // search for ducobox
         const ducoBoxes = this.getDucoBoxes();
         const i = ducoBoxes.findIndex((existingDucoBox: DucoBox) => {
-            return existingDucoBox.id === id || (typeof existingDucoBox.id === 'undefined' && isNaN(id));
+            return existingDucoBox.id === id || (isNaN(existingDucoBox.id) && isNaN(id)) || (null === existingDucoBox.id && isNaN(id));
         });
 
         // remove ducoBox when found

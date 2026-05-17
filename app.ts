@@ -4,6 +4,7 @@ import Homey, { Device } from 'homey';
 import NodeHelper from './lib/NodeHelper';
 import DiscoveryService from './lib/DiscoveryService';
 import AppService from './lib/AppService';
+import DucoDevice from './lib/homey/DucoDevice';
 
 export default class DucoApp extends Homey.App {
 
@@ -44,6 +45,22 @@ export default class DucoApp extends Homey.App {
     }
 
     return null;
+  }
+
+  getDevicesByDucoBoxId(ducoBoxId: number): Array<DucoDevice> {
+    const result = [];
+
+    const drivers = this.homey.drivers.getDrivers();
+    for(const id in drivers) {
+      const devices = drivers[id].getDevices();
+      for(const id in devices) {
+        if (ducoBoxId === (<DucoDevice>devices[id]).getDucoBoxId()) {
+          result.push(<DucoDevice>devices[id]);
+        }
+      }
+    }
+
+    return result;
   }
 }
 

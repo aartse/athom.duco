@@ -4,6 +4,7 @@ import Homey from 'homey/lib/Homey';
 import DucoBox from './types/DucoBox';
 import assert from "node:assert";
 import DucoBoxApiTypeEnum from './types/DucoBoxApiTypeEnum';
+import DucoApp from '../app';
 
 let settingsService: SettingsService|null = null;
 
@@ -25,11 +26,6 @@ export default class SettingsService {
     }
 
     init() {
-        // init a list of ducoBoxes
-        if (!Array.isArray(this.homey.settings.get('ducoBoxes'))) {
-            this.homey.settings.set('ducoBoxes', []);
-        }
-
         // migrate old settings to a ducoBox
         if (this.homey.settings.get('hostname')) {
             this.homey.log('migrating old settings to ducoBox 0');
@@ -59,7 +55,12 @@ export default class SettingsService {
     }
 
     getDucoBoxes() : Array<DucoBox> {
-        return this.homey.settings.get('ducoBoxes');
+        const ducoBoxes = this.homey.settings.get('ducoBoxes');
+        if (!Array.isArray(ducoBoxes)) {
+            return [];
+        }
+
+        return ducoBoxes;
     }
 
     getDucoBox(id: number) : DucoBox {
@@ -130,6 +131,17 @@ export default class SettingsService {
     }
 
     removeDucoBox(id: number) {
+        // check if this box has some devices left
+        const existingDevices = (this.homey.app as DucoApp).getDevicesByDucoBoxId(id);
+        if (existingDevices.length > 0) {
+            let errorMessage = "There are devices that depend on this Ducobox. Remove the devices first, before removing the DucoBox.\n\nThe devices that depend on this box:\n";
+            errorMessage += existingDevices.map((existingDevice) => {
+                return "- "+existingDevice.getName()+"\n";
+            });
+
+            throw new Error(errorMessage.trim());
+        }
+
         // search for ducobox
         const ducoBoxes = this.getDucoBoxes();
         const i = ducoBoxes.findIndex((existingDucoBox: DucoBox) => {

@@ -53,15 +53,43 @@ export default class SettingsService {
         return this.homey.settings.get('ducoBoxes');
     }
 
-    getDucoBox(id: number) : DucoBox|null {
-        return this.getDucoBoxes().find((ducoBox: DucoBox) => {
+    getDucoBox(id: number) : DucoBox {
+        const ducoBox = this.getDucoBoxes().find((ducoBox: DucoBox) => {
             return (ducoBox.id === id);
         }) || null;
+
+        if (null === ducoBox) {
+            throw new Error('no DucoBox found with id '+id);
+        }
+
+        return ducoBox;
     }
 
-    saveDucoBox(ducoBox: DucoBox) {
+    saveDucoBox(ducoBox: DucoBox) : DucoBox {
         // search for existing ducobox
         const ducoBoxes = this.getDucoBoxes();
+
+        // generate new id when not given
+        if (null === ducoBox.id || typeof ducoBox.id === 'undefined') {
+            let newId = 0;
+            let idFound = true;
+            while (idFound) {
+                idFound = false;
+                for(const existingDucoBox of ducoBoxes) {
+                    if (existingDucoBox.id === newId) {
+                        idFound = true;
+                        break;
+                    }
+                };
+
+                if (idFound) {
+                    newId++;
+                }
+            }
+            ducoBox.id = newId;
+        }
+
+        // search for existing item based on id
         const i = ducoBoxes.findIndex((existingDucoBox: DucoBox) => {
             return existingDucoBox.id === ducoBox.id;
         });
@@ -75,18 +103,20 @@ export default class SettingsService {
 
         // save ducoBoxes
         this.homey.settings.set('ducoBoxes', ducoBoxes);
+
+        return ducoBox;
     }
 
     removeDucoBox(id: number) {
         // search for ducobox
         const ducoBoxes = this.getDucoBoxes();
         const i = ducoBoxes.findIndex((existingDucoBox: DucoBox) => {
-            return existingDucoBox.id === id;
+            return existingDucoBox.id === id || (typeof existingDucoBox.id === 'undefined' && isNaN(id));
         });
 
         // remove ducoBox when found
         if (i !== -1) {
-            delete ducoBoxes[i];
+            ducoBoxes.splice(i, 1);
             this.homey.settings.set('ducoBoxes', ducoBoxes);
         }
     }

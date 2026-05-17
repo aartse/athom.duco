@@ -40,5 +40,27 @@
   "bugs": {
     "url": "https://github.com/aartse/athom.duco/issues"
   },
-  "support": "https://github.com/aartse/athom.duco/issues"
+  "support": "https://github.com/aartse/athom.duco/issues",
+  "api": {
+    "getDucoBoxes": {
+      "method": "GET",
+      "path": "/duco-boxes"
+    },
+    "getDucoBox": {
+      "method": "GET",
+      "path": "/duco-boxes/:id"
+    },
+    "postDucoBox": {
+      "method": "POST",
+      "path": "/duco-boxes"
+    },
+    "putDucoBox": {
+      "method": "PUT",
+      "path": "/duco-boxes/:id"
+    },
+    "deleteDucoBox": {
+      "method": "DELETE",
+      "path": "/duco-boxes/:id"
+    }
+  }
 }

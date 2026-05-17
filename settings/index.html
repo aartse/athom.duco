@@ -5,182 +5,329 @@
     <link type="text/css" rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="homey-header">
-      <h1 class="homey-title" data-i18n="settings.title"></h1>
-      <p class="homey-subtitle" data-i18n="settings.subtitle"></p>
-    </header>
-
     <div id="mainView">
-      <div class="homey-form-group">
-        <label class="homey-form-label" for="apiTypeSelect" data-i18n="settings.apiType">API</label>
-        <select class="homey-form-select" id="apiTypeSelect">
-          <option value="connectivity_board">Duco Connectivity Board</option>
-          <option value="communication_print">Duco Communication Print</option>
-        </select>
-        <p data-i18n="settings.api_hint"></p>
-      </div>
-
-      <div class="homey-form-group">
-        <label class="homey-form-label" for="hostnameInput" data-i18n="settings.hostname">IP / Hostname Ducobox</label>
-        <input class="homey-form-input" id="hostnameInput" type="text" value="" />
-        <p data-i18n="settings.hostname_hint"></p>
-      </div>
-
-      <label class="homey-form-checkbox">
-        <input type="checkbox" id="useHttpsInput" class="homey-form-checkbox-input" />
-        <span class="homey-form-checkbox-checkmark"></span>
-        <span class="homey-form-checkbox-text" data-i18n="settings.use_https">Use https</label>
-      </label>
-
-      <button id="searchButton" class="homey-button-secondary-shadow-full" data-i18n="settings.search">Search for Docuboxes</button>
+      <header class="homey-header">
+        <h1 class="homey-title" data-i18n="settings.main_view.title"></h1>
+        <p class="homey-subtitle" data-i18n="settings.main_view.subtitle"></p>
+      </header>
+      
+      <div id="ducoboxesList"></div>
       <br />
-      <button id="saveButton" class="homey-button-primary-full" data-i18n="settings.save">Save changes</button>
+
+      <button id="searchButton" class="homey-button-secondary-shadow-full" data-i18n="settings.main_view.search">Search for Docuboxes</button>
+      <br />
+
+      <button id="addButton" class="homey-button-secondary-shadow-full" data-i18n="settings.main_view.manual_add">Manual add a docubox</button>
+      <br />
+    </div>
+
+    <div id="editView">
+      <header class="homey-header">
+        <h1 class="homey-title" data-i18n="settings.edit_view.title"></h1>
+        <p class="homey-subtitle" data-i18n="settings.edit_view.subtitle"></p>
+      </header>
+
+      <form class="homey-form">
+          <input id="idInput" type="hidden" value="" />
+
+          <div class="homey-form-group">
+          <label class="homey-form-label" for="apiTypeSelect" data-i18n="settings.edit_view.api_type">API</label>
+          <select class="homey-form-select" id="apiTypeSelect">
+            <option value="connectivity_board">Duco Connectivity Board</option>
+            <option value="communication_print">Duco Communication Print</option>
+          </select>
+        </div>
+
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="nameInput" data-i18n="settings.edit_view.name">Name</label>
+          <input class="homey-form-input" id="nameInput" type="text" value="" />
+        </div>
+
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="hostnameInput" data-i18n="settings.edit_view.hostname">IP / Hostname Ducobox</label>
+          <input class="homey-form-input" id="hostnameInput" type="text" value="" />
+          <p data-i18n="settings.edit_view.hostname_hint"></p>
+        </div>
+
+        <label class="homey-form-checkbox">
+          <input type="checkbox" id="useHttpsInput" class="homey-form-checkbox-input" />
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text" data-i18n="settings.edit_view.use_https">Use https</label>
+        </label>
+      </form>
+      <br />
+
+      <button id="saveButton" class="homey-button-primary-full" data-i18n="settings.edit_view.save">Save changes</button>
+      <br />
+
+      <button id="cancelEditButton" class="homey-button-secondary-shadow-full" data-i18n="settings.edit_view.cancel">Cancel</button>
+      <br />
+
+      <button id="deleteButton" class="homey-button-danger-shadow-full" data-i18n="settings.edit_view.remove">Remove</button>
     </div>
 
     <div id="searchView" style="display:none">
-      <div id="duco_boxes_list"></div>
+      <header class="homey-header">
+        <h1 class="homey-title" data-i18n="settings.search_view.title"></h1>
+        <p class="homey-subtitle" data-i18n="settings.search_view.subtitle"></p>
+      </header>
+
+      <div id="ducoboxesSearchResult"></div>
       <br />
-      <button id="cancelSearchButton" class="homey-button-secondary-shadow-full" data-i18n="settings.cancel">Cancel search</button>
+
+      <button id="cancelSearchButton" class="homey-button-secondary-shadow-full" data-i18n="settings.search_view.cancel">Cancel search</button>
     </div>
 
     <script type="text/javascript">
+      // views
       const mainView = document.getElementById("mainView");
+      const editView = document.getElementById("editView");
       const searchView = document.getElementById("searchView");
-      const apiTypeSelectElement = document.getElementById("apiTypeSelect");
-      const hostnameInputElement = document.getElementById("hostnameInput");
-      const useHttpsInputElement = document.getElementById("useHttpsInput");
-      const searchButtonElement = document.getElementById("searchButton");
-      const cancelSearchButtonElement = document.getElementById("cancelSearchButton");
-      const saveButtonElement = document.getElementById("saveButton");
+
+      // main view elements
+      const addButton = document.getElementById("addButton");
+      const searchButton = document.getElementById("searchButton");
+
+      // edit view elements
+      const idInput = document.getElementById("idInput");
+      const apiTypeSelect = document.getElementById("apiTypeSelect");
+      const nameInput = document.getElementById("nameInput");
+      const hostnameInput = document.getElementById("hostnameInput");
+      const useHttpsInput = document.getElementById("useHttpsInput");
+      const saveButton = document.getElementById("saveButton");
+      const cancelEditButton = document.getElementById("cancelEditButton");
+
+      // search view elements
+      const cancelSearchButton = document.getElementById("cancelSearchButton");
 
       function onHomeyReady(Homey) {
-        Homey.ready();
+          Homey.ready();
 
-        // init value for api type input
-        Homey.get("apiType", function (err, apiType) {
-          if (err) {
-            return Homey.alert(err);
-          }
+          openView(mainView);
 
-          apiTypeSelectElement.value = apiType;
-        });
-
-        // init value for hostname input
-        Homey.get("hostname", function (err, hostname) {
-          if (err) {
-            return Homey.alert(err);
-          }
-
-          hostnameInputElement.value = hostname;
-        });
-
-        // init value for use https checkbox
-        Homey.get("useHttps", function (err, useHttps) {
-          if (err) {
-            return Homey.alert(err);
-          }
-
-          useHttpsInputElement.checked = useHttps;
-        });
-
-        // handle search button click
-        searchButtonElement.addEventListener("click", function (e) {
-          searchView.style.display = '';
-          mainView.style.display = 'none';
-
-          Homey.get("discoveredDucoBoxes", function (err, discoveredDucoBoxes) {
-            refreshDiscoveredDucoBoxes(Array.isArray(discoveredDucoBoxes) ? discoveredDucoBoxes : []);
+          // handle search button click
+          searchButton.addEventListener("click", function (e) {
+              openView(searchView);
           });
-        });
 
-        // handle cancel search button click
-        cancelSearchButtonElement.addEventListener("click", function (e) {
+          // handle add button click
+          addButton.addEventListener("click", function (e) {
+              idInput.value = '';
+              apiTypeSelect.value = 'connectivity_board';
+              nameInput.value = '';
+              hostnameInput.value = '';
+              useHttpsInput.checked = false;
+
+              openView(editView);
+          });
+
+          // handle cancel search button click
+          cancelSearchButton.addEventListener("click", function (e) {
+              openView(mainView);
+          });
+
+          // handle save button click
+          saveButton.addEventListener("click", function (e) {
+              function handleSaveResponse(err, result) {
+                  if (err) {
+                      return Homey.alert(err);
+                  }
+
+                  openView(mainView);
+              };
+
+              const data = {
+                  apiType: apiTypeSelect.value,
+                  name: nameInput.value,
+                  hostname: hostnameInput.value,
+                  useHttps: useHttpsInput.checked,
+              };
+
+              if ('' === idInput.value) {
+                  Homey.api("POST", "/duco-boxes", data, handleSaveResponse);
+              } else {
+                  Homey.api("PUT", "/duco-boxes/" + idInput.value, data, handleSaveResponse);
+              }
+          });
+
+          // handle cancel edit button click
+          cancelEditButton.addEventListener("click", function (e) {
+              openView(mainView);
+          });
+
+          // handle delete button click
+          deleteButton.addEventListener("click", function (e) {
+              Homey.api("DELETE", "/duco-boxes/" + idInput.value, null, function (err, result) {
+                  if (err) {
+                      return Homey.alert(err);
+                  }
+
+                  openView(mainView);
+              });
+          });
+      }
+
+      function openView(view) {
+          mainView.style.display = 'none';
+          editView.style.display = 'none';
           searchView.style.display = 'none';
-          mainView.style.display = '';
-        });
 
-        // handle save button click
-        saveButtonElement.addEventListener("click", function (e) {
-          var saveCount = 3;
-          function handleSaveCallback(err) {
-            if (err) {
-              return Homey.alert(err);
-            }
-
-            saveCount--;
-            if (saveCount === 0) {
-              Homey.alert(Homey.__('settings.saved'));
-            }
+          if (view === editView) {
+              deleteButton.style.display = idInput.value === '' ? 'none' : '';
           }
 
-          Homey.set("apiType", apiTypeSelectElement.value, handleSaveCallback);
-          Homey.set("hostname", hostnameInputElement.value, handleSaveCallback);
-          Homey.set("useHttps", useHttpsInputElement.checked, handleSaveCallback);
-        });
+          if (view === mainView) {
+              loadDucoBoxes();
+          }
+
+          if (view === searchView) {
+              Homey.get("discoveredDucoBoxes", function (err, discoveredDucoBoxes) {
+                  refreshDiscoveredDucoBoxes(Array.isArray(discoveredDucoBoxes) ? discoveredDucoBoxes : []);
+              });
+          }
+
+          view.style.display = '';
       }
 
       function refreshDiscoveredDucoBoxes(discoveredDucoBoxes) {
-        const docuBoxesListElement = document.getElementById("duco_boxes_list");
-        if (discoveredDucoBoxes.length === 0) {
-          docuBoxesListElement.innerHTML = Homey.__('settings.nothing_found');
-          return;
-        }
-        docuBoxesListElement.innerHTML = '';
+          const resultElement = document.getElementById("ducoboxesSearchResult");
+          if (discoveredDucoBoxes.length === 0) {
+              resultElement.innerHTML = Homey.__('settings.search_view.nothing_found');
+              return;
+          }
+          resultElement.innerHTML = '';
 
-        const table = document.createElement("table");
-		    table.setAttribute('class', 'decorated');
+          const table = document.createElement("table");
+          table.setAttribute('class', 'decorated');
 
-        // add header
-        var tableRow = document.createElement("tr");
-        table.appendChild(tableRow);
-
-        var tableCell = document.createElement("th");
-        tableCell.innerText = Homey.__('settings.name');
-        tableRow.appendChild(tableCell);
-
-        var tableCell = document.createElement("th");
-        tableCell.innerText = Homey.__('settings.url');
-        tableRow.appendChild(tableCell);
-
-        var tableCell = document.createElement("th");
-        tableCell.innerText = ' ';
-        tableRow.appendChild(tableCell);
-
-        // add boxes
-        for (var i=0; i<discoveredDucoBoxes.length; i++) {
-          var discoveredDucoBox = discoveredDucoBoxes[i];
-
+          // add header
           var tableRow = document.createElement("tr");
           table.appendChild(tableRow);
 
-          var tableCell = document.createElement("td");
-          tableCell.innerText = discoveredDucoBox.name;
+          var tableCell = document.createElement("th");
+          tableCell.innerText = Homey.__('settings.search_view.name');
           tableRow.appendChild(tableCell);
 
-          var tableCell = document.createElement("td");
-          tableCell.innerText = (discoveredDucoBox.port === 80 ? 'http://' : 'https://') + discoveredDucoBox.address;
+          var tableCell = document.createElement("th");
+          tableCell.innerText = Homey.__('settings.search_view.url');
           tableRow.appendChild(tableCell);
 
-          var tableCell = document.createElement("td");
-          var okButton = document.createElement("button");
-          okButton.innerText = Homey.__('settings.select');
-          okButton.className = 'homey-button-small';
-          okButton.discoveredDucoBox = discoveredDucoBox;
-          okButton.addEventListener("click", handleDiscoveredDucoBoxClick);
-          tableCell.style.textAlign = 'right';
-          tableCell.appendChild(okButton);
+          var tableCell = document.createElement("th");
+          tableCell.innerText = ' ';
           tableRow.appendChild(tableCell);
-        }
 
-        docuBoxesListElement.appendChild(table);
+          // add boxes
+          for (var i = 0; i < discoveredDucoBoxes.length; i++) {
+              var discoveredDucoBox = discoveredDucoBoxes[i];
+
+              var tableRow = document.createElement("tr");
+              table.appendChild(tableRow);
+
+              var tableCell = document.createElement("td");
+              tableCell.innerText = discoveredDucoBox.name;
+              tableRow.appendChild(tableCell);
+
+              var tableCell = document.createElement("td");
+              tableCell.innerText = (discoveredDucoBox.port === 80 ? 'http://' : 'https://') + discoveredDucoBox.address;
+              tableRow.appendChild(tableCell);
+
+              var tableCell = document.createElement("td");
+              var okButton = document.createElement("button");
+              okButton.innerText = Homey.__('settings.search_view.select');
+              okButton.className = 'homey-button-small';
+              okButton.discoveredDucoBox = discoveredDucoBox;
+              okButton.addEventListener("click", handleDiscoveredDucoBoxClick);
+              tableCell.style.textAlign = 'right';
+              tableCell.appendChild(okButton);
+              tableRow.appendChild(tableCell);
+          }
+
+          resultElement.appendChild(table);
+      }
+
+      function handleEditDucoBoxClick(e) {
+          idInput.value = e.target.ducoBox.id;
+          apiTypeSelect.value = e.target.ducoBox.apiType;
+          nameInput.value = e.target.ducoBox.name;
+          hostnameInput.value = e.target.ducoBox.hostname;
+          useHttpsInput.checked = e.target.ducoBox.useHttps;
+
+          openView(editView);
       }
 
       function handleDiscoveredDucoBoxClick(e) {
-        hostnameInputElement.value = e.target.discoveredDucoBox.address;
-        useHttpsInputElement.checked = e.target.discoveredDucoBox.port !== 80;
+          idInput.value = '';
+          apiTypeSelect.value = 'connectivity_board';
+          nameInput.value = e.target.discoveredDucoBox.name;
+          hostnameInput.value = e.target.discoveredDucoBox.address;
+          useHttpsInput.checked = e.target.discoveredDucoBox.port !== 80;
 
-        searchView.style.display = 'none';
-        mainView.style.display = '';
+          openView(editView);
+      }
+
+      function loadDucoBoxes() {
+          const resultElement = document.getElementById("ducoboxesList");
+          resultElement.innerText = Homey.__('settings.main_view.loading');
+
+          Homey.api("GET", "/duco-boxes", null, function (err, ducoBoxes) {
+              if (err) {
+                  return Homey.alert(err);
+              }
+
+              // handle 
+              if (ducoBoxes.length === 0) {
+                  resultElement.innerHTML = Homey.__('settings.main_view.no_ducoboxes');
+                  return;
+              }
+              resultElement.innerHTML = '';
+
+              const table = document.createElement("table");
+              table.setAttribute('class', 'decorated');
+
+              // add header
+              var tableRow = document.createElement("tr");
+              table.appendChild(tableRow);
+
+              var tableCell = document.createElement("th");
+              tableCell.innerText = Homey.__('settings.main_view.name');
+              tableRow.appendChild(tableCell);
+
+              var tableCell = document.createElement("th");
+              tableCell.innerText = Homey.__('settings.main_view.url');
+              tableRow.appendChild(tableCell);
+
+              var tableCell = document.createElement("th");
+              tableCell.innerText = ' ';
+              tableRow.appendChild(tableCell);
+
+              // add boxes
+              for (var i = 0; i < ducoBoxes.length; i++) {
+                  var ducoBox = ducoBoxes[i];
+
+                  var tableRow = document.createElement("tr");
+                  table.appendChild(tableRow);
+
+                  var tableCell = document.createElement("td");
+                  tableCell.innerText = ducoBox.name;
+                  tableRow.appendChild(tableCell);
+
+                  var tableCell = document.createElement("td");
+                  tableCell.innerText = (ducoBox.useHttps ? 'https://' : 'http://') + ducoBox.hostname;
+                  tableRow.appendChild(tableCell);
+
+                  var tableCell = document.createElement("td");
+                  var editButton = document.createElement("button");
+                  editButton.innerText = Homey.__('settings.main_view.edit');
+                  editButton.className = 'homey-button-small';
+                  editButton.ducoBox = ducoBox;
+                  editButton.addEventListener("click", handleEditDucoBoxClick);
+                  tableCell.style.textAlign = 'right';
+                  tableCell.appendChild(editButton);
+                  tableRow.appendChild(tableCell);
+              }
+
+              resultElement.appendChild(table);
+          });
       }
     </script>
   </body>

@@ -1,26 +1,43 @@
 {
     "settings": {
-        "title": "App configuratie",
-        "hostname": "IP / Hostnaam DucoBox",
-        "hostname_hint": "Dit is het IP adres of hostname van de DucoBox op je lokale netwerk.",
-        "use_https": "Gebruik https",
-        "use_communication_print_api": "Gebruik communication print api",
-        "nothing_found": "Niets gevonden.",
-        "name": "Naam",
-        "url": "URL",
-        "select": "Selecteren",
-        "save": "Opslaan",
-        "search": "Zoeken naar DucoBox",
-        "cancel": "Annuleren",
-        "saved": "Instellingen zijn opgeslagen"
+        "main_view": {
+            "title": "DucoBoxes",
+            "subtitle": "Hieronder staan de geconfigureerde ducoboxes",
+            "loading": "Laden...",
+            "no_ducoboxes": "Er zijn geen DucoBoxes geconfigureerd, klik op 'zoeken' of voeg handmatig een DucoBox toe.",
+            "name": "Naam",
+            "url": "URL",
+            "edit": "Bewerken",
+            "manual_add": "Handmatig toevoegen",
+            "search": "Zoeken naar DucoBox"
+        },
+        "edit_view": {
+            "title": "DucoBox toevoegen of bewerken",
+            "subtitle": "",
+            "api_type": "API",
+            "name": "Naam",
+            "hostname": "IP / Hostnaam DucoBox",
+            "hostname_hint": "Dit is het IP adres of hostname van de DucoBox op je lokale netwerk.",
+            "use_https": "Gebruik https",
+            "use_communication_print_api": "Gebruik communication print api",
+            "save": "Opslaan",
+            "cancel": "Annuleren",
+            "remove": "Verwijderen"
+        },
+        "search_view": {
+            "title": "DucoBox zoeken",
+            "subtitle": "Hieronder staan de gevonden DucoBoxes op het netwerk. Als een ducobox niet gevonden kan worden, ga dan terug en voeg de box handmatig toe.",
+            "name": "Naam",
+            "url": "URL",
+            "select": "Selecteren",
+            "nothing_found": "Niets gevonden.",
+            "cancel": "Annuleren"
+        }
     },
     "pair": {
         "list_ducoboxes": {
             "title": "Selecteer een ducobox",
             "subtitle": "Staat de ducobox er niet tussen, voeg hem dan toe via de instellingen van de app"
         }
-    },
-    "error": {
-        "hostname_not_set": "IP van de DucoBox is niet ingeseld in de instellingen van de app"
     }
 }

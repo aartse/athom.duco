@@ -136,8 +136,8 @@ export default class SettingsService {
         if (existingDevices.length > 0) {
             let errorMessage = "There are devices that depend on this Ducobox. Remove the devices first, before removing the DucoBox.\n\nThe devices that depend on this box:\n";
             errorMessage += existingDevices.map((existingDevice) => {
-                return "- "+existingDevice.getName()+"\n";
-            });
+                return "- "+existingDevice.getName();
+            }).join("\n");
 
             throw new Error(errorMessage.trim());
         }

@@ -6,6 +6,8 @@ import { PairSession } from "homey/lib/Driver";
 import SettingsService from "../SettingsService";
 import AppService from "../AppService";
 import NodeHelper from "../NodeHelper";
+import DiscoveryService from "../DiscoveryService";
+import DucoBoxApiTypeEnum from "../types/DucoBoxApiTypeEnum";
 
 export default class DucoDriver extends Homey.Driver {
     updateByNode(ducoBox: DucoBox, node: NodeInterface) {
@@ -46,10 +48,38 @@ export default class DucoDriver extends Homey.Driver {
       let ducoBoxId: number;
 
       session.setHandler("list_ducoboxes", async (): Promise<object[]> => {
-        return SettingsService.create(this.homey).getDucoBoxes();
+        const existingDucoBoxes = SettingsService.create(this.homey).getDucoBoxes();
+
+        const discoveredDucoBoxes = [];
+        for (const discoveredDevice of DiscoveryService.create(this.homey).getDiscoveredDevices()) {
+          // search for an existing ducobox
+          const ducoboxExists = existingDucoBoxes.find((ducoBox: DucoBox) => {
+              return (ducoBox.hostname === discoveredDevice.address);
+          }) || null;
+
+          // skip if a box already exists with this hostname
+          if (existingDucoBoxes.length > 0 && ducoboxExists !== null) {
+            continue;
+          }
+
+          // add a ducobox, the box is created wheb the user choses this box
+          discoveredDucoBoxes.push(<DucoBox>{
+            apiType: DucoBoxApiTypeEnum.connectivity_board,
+            name: discoveredDevice.name,
+            hostname: discoveredDevice.address,
+            useHttps: discoveredDevice.port !== 80
+          });
+        }
+
+        return [...existingDucoBoxes, ...discoveredDucoBoxes];
       });
 
       session.setHandler("selected_ducobox", async (ducoBox: DucoBox) => {
+        // create a ducobox when the id is not given (this can happen when the device is discovered)
+        if (null === ducoBox.id || typeof ducoBox.id === 'undefined') {
+          ducoBox = SettingsService.create(this.homey).saveDucoBox(ducoBox);
+        }
+
         ducoBoxId = ducoBox.id;
       });
 

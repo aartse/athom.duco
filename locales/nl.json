@@ -17,7 +17,7 @@
             "api_type": "API",
             "name": "Naam",
             "hostname": "IP / Hostnaam DucoBox",
-            "hostname_hint": "Dit is het IP adres of hostname van de DucoBox op je lokale netwerk.",
+            "hostname_hint": "Dit is het IP adres of hostnaam van de DucoBox op je lokale netwerk. TIP: zorg ervoor dat je DucoBox een statisch IP adres heeft.",
             "use_https": "Gebruik https",
             "use_communication_print_api": "Gebruik communication print api",
             "save": "Opslaan",

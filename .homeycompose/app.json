@@ -1,6 +1,6 @@
 {
   "id": "nl.aartse.duco",
-  "version": "1.12.1",
+  "version": "1.13.0",
   "compatibility": ">=12.3.0",
   "sdk": 3,
   "platforms": [

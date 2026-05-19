@@ -46,5 +46,8 @@
   },
   "1.12.1": {
     "en": "Added support for the communication print"
+  },
+  "1.13.0": {
+    "en": "added support for multiple ducoboxes"
   }
 }

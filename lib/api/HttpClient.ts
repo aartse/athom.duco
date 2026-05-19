@@ -6,35 +6,20 @@ import http from 'http';
 
 export default class HttpClient {
 
-    homey: Homey
-    hostname!: string;
+    homey: Homey;
+    hostname: string;
     useHttps: boolean;
 
-    constructor(homey: Homey) {
+    constructor(homey: Homey, hostname: string, useHttps: boolean) {
         this.homey = homey;
-
-        this.homey.settings.on('set', this.onSettingsChange.bind(this));
-        this.hostname = this.homey.settings.get('hostname');
-        this.useHttps = this.homey.settings.get('useHttps');
-    }
-
-    destroy() : void {
-        this.homey.settings.off('set', this.onSettingsChange);
-    }
-
-    onSettingsChange (field: any) : void {
-        if ('hostname' === field) {
-            this.hostname = this.homey.settings.get('hostname');
-        }
-        if ('useHttps' === field) {
-            this.useHttps = this.homey.settings.get('useHttps');
-        }
+        this.hostname = hostname;
+        this.useHttps = useHttps;
     }
 
     get(path: string) : Promise <string> {
         return new Promise((resolve, reject) => {
             if (!this.hostname) {
-                return reject(new Error(this.homey.__('error.hostname_not_set')));
+                return reject(new Error('Hostname is not set'));
             }
 
             const homey = this.homey;
@@ -92,7 +77,7 @@ export default class HttpClient {
     post(path: string, postData: any) : Promise <string> {
         return new Promise((resolve, reject) => {
             if (!this.hostname) {
-                return reject(new Error(this.homey.__('error.hostname_not_set')));
+                return reject(new Error('Hostname is not set'));
             }
 
             const homey = this.homey;

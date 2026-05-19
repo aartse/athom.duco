@@ -1,44 +1,21 @@
 'use strict';
 
 import Homey, { Device } from 'homey';
-import UpdateListener from './lib/UpdateListner';
 import NodeHelper from './lib/NodeHelper';
 import DiscoveryService from './lib/DiscoveryService';
-import DucoApiFactory from './lib/api/DucoApiFactory';
-import DucoApi from './lib/api/types/DucoApi';
+import AppService from './lib/AppService';
+import DucoDevice from './lib/homey/DucoDevice';
 
 export default class DucoApp extends Homey.App {
-  ducoApi!: DucoApi
+
+  appService!: AppService
 
   async onInit() {
-    // init settings
-    if (this.homey.settings.get('apiType') === null) {
-      this.homey.settings.set('apiType', 'connectivity_board');
-    }
-    if (this.homey.settings.get('hostname') === null) {
-      this.homey.settings.set('hostname', '');
-    }
-    if (this.homey.settings.get('useHttps') === null) {
-      this.homey.settings.set('useHttps', true);
-    }
+    // init app service
+    this.appService = AppService.create(this.homey)
+    this.appService.init();
 
-    // init duco API
-    this.ducoApi = DucoApiFactory.create(this.homey);
-
-    // reinit duco API when api type in settings is changed
-    const onSettingsChange = (field: any) => {
-        if ('apiType' === field) {
-            this.homey.log('apiType changed, reloading API');
-
-            DucoApiFactory.destroy();
-            this.ducoApi = DucoApiFactory.create(this.homey);
-        }
-    }
-    this.homey.settings.on('set', onSettingsChange);
-
-    const updateListner = UpdateListener.create(this.homey);
-    updateListner.startListener();
-
+    // init discover service
     DiscoveryService.create(this.homey).discover();
   }
 
@@ -68,6 +45,22 @@ export default class DucoApp extends Homey.App {
     }
 
     return null;
+  }
+
+  getDevicesByDucoBoxId(ducoBoxId: number): Array<DucoDevice> {
+    const result = [];
+
+    const drivers = this.homey.drivers.getDrivers();
+    for(const id in drivers) {
+      const devices = drivers[id].getDevices();
+      for(const id in devices) {
+        if (ducoBoxId === (<DucoDevice>devices[id]).getDucoBoxId()) {
+          result.push(<DucoDevice>devices[id]);
+        }
+      }
+    }
+
+    return result;
   }
 }
 

@@ -1,7 +1,6 @@
 'use strict';
 
 import NodeActionEnum from "../../lib/api/types/NodeActionEnum";
-import UpdateListener from "../../lib/UpdateListner";
 
 module.exports = {
   async updateVentilationState({ homey, params, body }) {
@@ -30,13 +29,13 @@ module.exports = {
     }
 
     // update ventilation state
-    homey.app.ducoApi.postNodeAction(device.getData().id, {
+    device.postNodeAction({
       Action: NodeActionEnum.SetVentilationState,
       Val: body.state
     }).then(() => {
       // update capability value and restart listener with a timeout to make sure the has updated the values
       device.setCapabilityValue('ventilation_state', body.state);
-      UpdateListener.create(this.homey).startListener(10000);
+      device.updateNode();
     });
   },
 

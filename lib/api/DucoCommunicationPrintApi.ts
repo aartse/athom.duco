@@ -6,17 +6,14 @@ import PostNodeAction from './types/PostNodeAction';
 import HttpClient from './HttpClient';
 import { NodeInfoGet } from './types/NodeInfoGet';
 import DucoApi from './types/DucoApi';
+import DucoBox from '../types/DucoBox';
 
 export default class DucoCommunicationPrintApi implements DucoApi {
 
     httpClient: HttpClient
 
-    constructor(homey: Homey) {
-        this.httpClient = new HttpClient(homey);
-    }
-
-    destroy() : void {
-        this.httpClient.destroy();
+    constructor(homey: Homey, ducoBox: DucoBox) {
+        this.httpClient = new HttpClient(homey, ducoBox.hostname, ducoBox.useHttps);
     }
 
     async getNodes() : Promise<NodeInterface[]> {

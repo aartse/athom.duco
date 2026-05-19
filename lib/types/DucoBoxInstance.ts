@@ -1,56 +1,41 @@
-'use strict';
-
 import Homey from 'homey/lib/Homey';
-import NodeInterface from './api/types/NodeInterface';
-import NodeHelper from './NodeHelper';
-import DucoDriver from './homey/DucoDriver';
-import DucoApiFactory from './api/DucoApiFactory';
+import DucoBox from "./DucoBox";
+import DucoApi from "../api/types/DucoApi";
+import DucoCommunicationPrintApi from "../api/DucoCommunicationPrintApi";
+import DucoConnectivityBoardApi from "../api/DucoConnectivityBoardApi";
+import NodeInterface from "../api/types/NodeInterface";
+import DucoDriver from "../homey/DucoDriver";
+import NodeHelper from "../NodeHelper";
 
-let updateListener: UpdateListener|null = null;
+export default class DucoBoxInstance {
 
-export default class UpdateListener {
-
-    refreshInterval: number = 60000
     homey: Homey
+    ducoBox: DucoBox
+    ducoApi: DucoApi
+    refreshInterval: number = 60000
     timeoutId: any
     initTimeoutId: any
     updatingDevices: boolean
 
-    constructor(homey: Homey) {
+    constructor(homey: Homey, ducoBox: DucoBox) {
         this.homey = homey;
+        this.ducoBox = ducoBox;
         this.timeoutId = null;
         this.updatingDevices = false;
 
-        const onSettingsChange = (field: any) => {
-            if ('apiType' === field || 'hostname' === field || 'useHttps' === field) {
-                // restart listener with a timeout to make sure the settings are changed
-                this.startListener(1000);
-            }
-        }
-
-        this.homey.settings.on('set', onSettingsChange);
+        // create Duco API
+        this.ducoApi = 'communication_print' === ducoBox.apiType
+            ? new DucoCommunicationPrintApi(homey, ducoBox)
+            : new DucoConnectivityBoardApi(homey, ducoBox);
     }
 
-    static create(homey: Homey) {
-        if (null === updateListener) {
-            updateListener = new UpdateListener(homey);
-        }
-
-        return updateListener;
+    getApi(): DucoApi {
+        return this.ducoApi;
     }
 
     startListener(initTimeout: number|null = null) {
-        // stop the listener interval
-        if (this.timeoutId) {
-            this.homey.clearInterval(this.timeoutId);
-            this.timeoutId = null;
-        }
-
-        // stop the init timeout interval
-        if (this.initTimeoutId) {
-            this.homey.clearTimeout(this.initTimeoutId);
-            this.initTimeoutId = null;
-        }
+        // first stop the listener
+        this.stopListener();
 
         // use polling to update the data
         const timeoutCallback = () => {
@@ -70,6 +55,20 @@ export default class UpdateListener {
         }
     }
 
+    stopListener() {
+        // stop the listener interval
+        if (this.timeoutId) {
+            this.homey.clearInterval(this.timeoutId);
+            this.timeoutId = null;
+        }
+
+        // stop the init timeout interval
+        if (this.initTimeoutId) {
+            this.homey.clearTimeout(this.initTimeoutId);
+            this.initTimeoutId = null;
+        }
+    }
+
     updateDevices() {
         if (this.updatingDevices) {
             this.homey.error('update devices process already running');
@@ -77,7 +76,7 @@ export default class UpdateListener {
         }
         this.updatingDevices = true;
 
-        DucoApiFactory.create(this.homey).getNodes().then(nodes => {
+        this.ducoApi.getNodes().then(nodes => {
             this.updatingDevices = false;
 
             nodes.forEach((node: NodeInterface) => {
@@ -90,7 +89,7 @@ export default class UpdateListener {
             for(const id in drivers) {
                 const driver = <DucoDriver>drivers[id];
 
-                driver.setUnavailable(err);
+                driver.setUnavailable(this.ducoBox, err);
             }
         });
     }
@@ -99,8 +98,8 @@ export default class UpdateListener {
         NodeHelper.getDriverIdsForNodeType(node.General.Type.Val).forEach((driverId: string) => {
             const driver = <DucoDriver>this.homey.drivers.getDriver(driverId);
             
-            driver.setAvailable();
-            driver.updateByNode(node);
+            driver.setAvailable(this.ducoBox);
+            driver.updateByNode(this.ducoBox, node);
         })
     }
 }

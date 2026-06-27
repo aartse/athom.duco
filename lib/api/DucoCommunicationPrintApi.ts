@@ -83,7 +83,20 @@ export default class DucoCommunicationPrintApi implements DucoApi {
                     Val: result.trgt,
                 },
             },
-            Sensor: undefined,
+            Sensor: {
+                Rh: {
+                    Val: result.rh
+                },
+                IaqRh: {
+                    Val: result.snsr
+                },
+                Co2: {
+                    Val: result.co2
+                },
+                IaqCo2: {
+                    Val: result.snsr
+                },
+            },
         };
     }
 }

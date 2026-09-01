@@ -52,5 +52,8 @@
   },
   "1.13.1": {
     "en": "FIX: #16 - CO2/RH not read for nodes on Communication Print (Sensor hardcoded to undefined)"
+  },
+  "1.13.2": {
+    "en": "NEW: #12 - Support for multiple connectivity boards / boxes on one Homey instance\nFIX: #16 - CO2/RH not read for nodes on Communication Print (Sensor hardcoded to undefined)"
   }
 }

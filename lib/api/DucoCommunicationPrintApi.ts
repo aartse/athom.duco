@@ -7,6 +7,7 @@ import HttpClient from './HttpClient';
 import { NodeInfoGet } from './types/NodeInfoGet';
 import DucoApi from './types/DucoApi';
 import DucoBox from '../types/DucoBox';
+import NodeConfig from './types/NodeConfig';
 
 export default class DucoCommunicationPrintApi implements DucoApi {
 
@@ -30,6 +31,18 @@ export default class DucoCommunicationPrintApi implements DucoApi {
         }
 
         return nodes;
+    }
+
+    supportsNodeConfig() : boolean {
+        return false;
+    }
+
+    async getNodeConfig(nodeId: number) : Promise<NodeConfig> {
+        throw new Error('Node configuration requires a Duco Connectivity Board.');
+    }
+
+    async patchNodeConfig(nodeId: number, values: Record<string, number>) : Promise<NodeConfig> {
+        throw new Error('Node configuration requires a Duco Connectivity Board.');
     }
 
     async postNodeAction(nodeId: number, postData: PostNodeAction) : Promise<void> {

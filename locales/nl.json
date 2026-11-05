@@ -39,5 +39,14 @@
             "title": "Selecteer een ducobox",
             "subtitle": "Staat de ducobox er niet tussen, voeg hem dan toe via de instellingen van de app"
         }
+    },
+    "errors": {
+        "config_not_supported": "Het aanpassen van de boxconfiguratie vereist een Duco Connectivity Board.",
+        "invalid_value": "Vul voor elke ventilatiestand een getal in.",
+        "levels_out_of_order": "Stand 1 mag niet hoger zijn dan stand 2, en stand 2 niet hoger dan stand 3.",
+        "auto_out_of_order": "Het automatische minimum mag niet hoger zijn dan het automatische maximum.",
+        "parameter_not_supported": "Deze DucoBox ondersteunt de instelling __parameter__ niet.",
+        "out_of_range": "__parameter__ moet tussen __min__ en __max__ liggen (was __value__).",
+        "config_unavailable": "Het Connectivity Board gaf de configuratie van de ventilatiestanden niet terug."
     }
 }

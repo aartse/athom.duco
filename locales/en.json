@@ -39,5 +39,14 @@
             "title": "Select a ducobox",
             "subtitle": "If the ducobox is not listed, add it via the app's settings"
         }
+    },
+    "errors": {
+        "config_not_supported": "Changing the box configuration requires a Duco Connectivity Board.",
+        "invalid_value": "Enter a number for every ventilation level setting.",
+        "levels_out_of_order": "Level 1 must be at most level 2, and level 2 at most level 3.",
+        "auto_out_of_order": "The automatic minimum must be at most the automatic maximum.",
+        "parameter_not_supported": "This DucoBox does not support the setting __parameter__.",
+        "out_of_range": "__parameter__ must be between __min__ and __max__ (got __value__).",
+        "config_unavailable": "The Connectivity Board did not return the ventilation level configuration."
     }
 }

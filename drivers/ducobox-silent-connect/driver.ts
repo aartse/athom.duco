@@ -23,6 +23,16 @@ class DucoboxSilentConnectDriver extends DucoDriver {
       });
     });
     
+    // init configuration action cards (Connectivity Board only)
+    const setFlowLevelPercentageAction = this.homey.flow.getActionCard('ducobox-silent-connect__set_flow_level_percentage');
+    setFlowLevelPercentageAction.registerRunListener((args, state) => {
+      return args.device.setFlowLevelPercentage(Number(args.level), Number(args.percentage));
+    });
+    const setVentilationPercentageAction = this.homey.flow.getActionCard('ducobox-silent-connect__set_ventilation_percentage');
+    setVentilationPercentageAction.registerRunListener((args, state) => {
+      return args.device.setVentilationPercentage(Number(args.percentage));
+    });
+
     // init condition cards
     const ventilationStateCondition = this.homey.flow.getConditionCard('ducobox-silent-connect__ventilation_state_is');
     ventilationStateCondition.registerRunListener((args, state) => {

@@ -1,0 +1,32 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Ventilation levels (Connectivity Board)",
+      "nl": "Ventilatiestanden (Connectivity Board)"
+    },
+    "children": [
+      {
+        "$extends": "flow_max"
+      },
+      {
+        "$extends": "flow_level_man1"
+      },
+      {
+        "$extends": "flow_level_man2"
+      },
+      {
+        "$extends": "flow_level_man3"
+      },
+      {
+        "$extends": "flow_level_auto_min"
+      },
+      {
+        "$extends": "flow_level_auto_max"
+      },
+      {
+        "$extends": "time_man"
+      }
+    ]
+  }
+]

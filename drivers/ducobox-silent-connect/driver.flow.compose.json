@@ -43,6 +43,14 @@
     {
       "$extends":"change_ventilation_state",
       "id": "ducobox-silent-connect__change_ventilation_state"
+    },
+    {
+      "$extends":"set_flow_level_percentage",
+      "id": "ducobox-silent-connect__set_flow_level_percentage"
+    },
+    {
+      "$extends":"set_ventilation_percentage",
+      "id": "ducobox-silent-connect__set_ventilation_percentage"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+    "type": "label",
+    "label": {
+        "en": "Maximum flow",
+        "nl": "Maximaal debiet"
+    },
+    "value": "-",
+    "hint": {
+        "en": "Maximum flow of the box (100 %), set during calibration with the Duco Installation App. Read-only.",
+        "nl": "Maximaal debiet van de box (100 %), ingesteld bij het inregelen met de Duco Installation App. Alleen-lezen."
+    }
+}

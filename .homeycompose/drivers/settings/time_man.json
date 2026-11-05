@@ -1,0 +1,19 @@
+{
+    "type": "number",
+    "label": {
+        "en": "Temporary level duration",
+        "nl": "Duur tijdelijke stand"
+    },
+    "value": 15,
+    "min": 5,
+    "max": 720,
+    "step": 5,
+    "units": {
+        "en": "min",
+        "nl": "min"
+    },
+    "hint": {
+        "en": "How long a temporary level (Manual 1/2/3) lasts. The x2 and x3 variants last twice or three times as long.",
+        "nl": "Hoe lang een tijdelijke stand (Tijdelijk 1/2/3) duurt. De x2- en x3-varianten duren twee of drie keer zo lang."
+    }
+}

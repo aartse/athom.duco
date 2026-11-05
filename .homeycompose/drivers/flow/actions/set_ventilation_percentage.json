@@ -1,0 +1,29 @@
+{
+    "title": {
+        "en": "Set ventilation percentage",
+        "nl": "Stel ventilatiepercentage in"
+    },
+    "titleFormatted": {
+        "en": "Set ventilation to [[percentage]] %",
+        "nl": "Zet ventilatie op [[percentage]] %"
+    },
+    "hint": {
+        "en": "Stepless ventilation: switches the box to permanent level 2 and sets the flow of level 2. Limited to the range between level 1 and level 3, in steps of 5. Only writes when something changes. Requires a Connectivity Board.",
+        "nl": "Traploos ventileren: zet de box op permanent stand 2 en stelt het debiet van stand 2 in. Begrensd tussen stand 1 en stand 3, in stappen van 5. Schrijft alleen als er iets verandert. Vereist een Connectivity Board."
+    },
+    "args": [
+        {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+                "en": "Percentage",
+                "nl": "Percentage"
+            }
+        }
+    ]
+}

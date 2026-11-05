@@ -1,10 +1,10 @@
-import DucoDevice from '../../lib/homey/DucoDevice';
+import DucoBoxDevice from '../../lib/homey/DucoBoxDevice';
 import NodeInterface from '../../lib/api/types/NodeInterface';
 import NodeActionEnum from '../../lib/api/types/NodeActionEnum';
 import DucoBoxCapabilityValues from '../../lib/types/DucoBoxCapabilityValues';
 import FlowHelper from '../../lib/FlowHelper';
 
-class DucoboxFocusDevice extends DucoDevice {
+class DucoboxFocusDevice extends DucoBoxDevice {
 
   async initCapabilities() {
     if (!this.hasCapability('ventilation_state')) {

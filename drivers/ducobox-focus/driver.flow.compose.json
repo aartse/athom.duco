@@ -35,6 +35,14 @@
     {
       "$extends":"change_ventilation_state",
       "id": "ducobox-focus__change_ventilation_state"
+    },
+    {
+      "$extends":"set_flow_level_percentage",
+      "id": "ducobox-focus__set_flow_level_percentage"
+    },
+    {
+      "$extends":"set_ventilation_percentage",
+      "id": "ducobox-focus__set_ventilation_percentage"
     }
   ]
 }

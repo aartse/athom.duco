@@ -1,0 +1,19 @@
+{
+    "type": "number",
+    "label": {
+        "en": "Automatic minimum",
+        "nl": "Automatisch minimum"
+    },
+    "value": 30,
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "units": {
+        "en": "%",
+        "nl": "%"
+    },
+    "hint": {
+        "en": "Lowest flow the box uses in automatic mode, based on its own Duco sensors.",
+        "nl": "Laagste debiet dat de box in automatische modus gebruikt, op basis van eigen Duco-sensoren."
+    }
+}

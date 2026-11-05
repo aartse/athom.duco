@@ -4237,6 +4237,103 @@
         ]
       },
       {
+        "id": "ducobox-focus__set_flow_level_percentage",
+        "title": {
+          "en": "Set level flow percentage",
+          "nl": "Stel debiet van stand in"
+        },
+        "titleFormatted": {
+          "en": "Set level [[level]] to [[percentage]] %",
+          "nl": "Zet stand [[level]] op [[percentage]] %"
+        },
+        "hint": {
+          "en": "Changes the flow percentage of a ventilation level on the box (rounded to steps of 5). Requires a Connectivity Board.",
+          "nl": "Past het debietpercentage van een ventilatiestand op de box aan (afgerond op stappen van 5). Vereist een Connectivity Board."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ducobox-focus"
+          },
+          {
+            "type": "dropdown",
+            "name": "level",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "1",
+                  "nl": "1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "2",
+                  "nl": "2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "3",
+                  "nl": "3"
+                }
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ducobox-focus__set_ventilation_percentage",
+        "title": {
+          "en": "Set ventilation percentage",
+          "nl": "Stel ventilatiepercentage in"
+        },
+        "titleFormatted": {
+          "en": "Set ventilation to [[percentage]] %",
+          "nl": "Zet ventilatie op [[percentage]] %"
+        },
+        "hint": {
+          "en": "Stepless ventilation: switches the box to permanent level 2 and sets the flow of level 2. Limited to the range between level 1 and level 3, in steps of 5. Only writes when something changes. Requires a Connectivity Board.",
+          "nl": "Traploos ventileren: zet de box op permanent stand 2 en stelt het debiet van stand 2 in. Begrensd tussen stand 1 en stand 3, in stappen van 5. Schrijft alleen als er iets verandert. Vereist een Connectivity Board."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ducobox-focus"
+          },
+          {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            }
+          }
+        ]
+      },
+      {
         "id": "ducobox-silent-connect__change_ventilation_state",
         "title": {
           "en": "Change ventilation state to",
@@ -4376,6 +4473,103 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      {
+        "id": "ducobox-silent-connect__set_flow_level_percentage",
+        "title": {
+          "en": "Set level flow percentage",
+          "nl": "Stel debiet van stand in"
+        },
+        "titleFormatted": {
+          "en": "Set level [[level]] to [[percentage]] %",
+          "nl": "Zet stand [[level]] op [[percentage]] %"
+        },
+        "hint": {
+          "en": "Changes the flow percentage of a ventilation level on the box (rounded to steps of 5). Requires a Connectivity Board.",
+          "nl": "Past het debietpercentage van een ventilatiestand op de box aan (afgerond op stappen van 5). Vereist een Connectivity Board."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ducobox-silent-connect"
+          },
+          {
+            "type": "dropdown",
+            "name": "level",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "1",
+                  "nl": "1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "2",
+                  "nl": "2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "3",
+                  "nl": "3"
+                }
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ducobox-silent-connect__set_ventilation_percentage",
+        "title": {
+          "en": "Set ventilation percentage",
+          "nl": "Stel ventilatiepercentage in"
+        },
+        "titleFormatted": {
+          "en": "Set ventilation to [[percentage]] %",
+          "nl": "Zet ventilatie op [[percentage]] %"
+        },
+        "hint": {
+          "en": "Stepless ventilation: switches the box to permanent level 2 and sets the flow of level 2. Limited to the range between level 1 and level 3, in steps of 5. Only writes when something changes. Requires a Connectivity Board.",
+          "nl": "Traploos ventileren: zet de box op permanent stand 2 en stelt het debiet van stand 2 in. Begrensd tussen stand 1 en stand 3, in stappen van 5. Schrijft alleen als er iets verandert. Vereist een Connectivity Board."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ducobox-silent-connect"
+          },
+          {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            }
           }
         ]
       },
@@ -5188,7 +5382,151 @@
         "large": "/drivers/ducobox-focus/assets/images/large.png",
         "xlarge": "/drivers/ducobox-focus/assets/images/xlarge.png"
       },
-      "id": "ducobox-focus"
+      "id": "ducobox-focus",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Ventilation levels (Connectivity Board)",
+            "nl": "Ventilatiestanden (Connectivity Board)"
+          },
+          "children": [
+            {
+              "id": "flow_max",
+              "type": "label",
+              "label": {
+                "en": "Maximum flow",
+                "nl": "Maximaal debiet"
+              },
+              "value": "-",
+              "hint": {
+                "en": "Maximum flow of the box (100 %), set during calibration with the Duco Installation App. Read-only.",
+                "nl": "Maximaal debiet van de box (100 %), ingesteld bij het inregelen met de Duco Installation App. Alleen-lezen."
+              }
+            },
+            {
+              "id": "flow_level_man1",
+              "type": "number",
+              "label": {
+                "en": "Level 1",
+                "nl": "Stand 1"
+              },
+              "value": 15,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 1 as a percentage of the maximum flow. At most level 2.",
+                "nl": "Debiet van stand 1 als percentage van het maximale debiet. Hoogstens stand 2."
+              }
+            },
+            {
+              "id": "flow_level_man2",
+              "type": "number",
+              "label": {
+                "en": "Level 2",
+                "nl": "Stand 2"
+              },
+              "value": 30,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 2 as a percentage of the maximum flow. Between level 1 and level 3.",
+                "nl": "Debiet van stand 2 als percentage van het maximale debiet. Tussen stand 1 en stand 3."
+              }
+            },
+            {
+              "id": "flow_level_man3",
+              "type": "number",
+              "label": {
+                "en": "Level 3",
+                "nl": "Stand 3"
+              },
+              "value": 100,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 3 as a percentage of the maximum flow. At least level 2.",
+                "nl": "Debiet van stand 3 als percentage van het maximale debiet. Minstens stand 2."
+              }
+            },
+            {
+              "id": "flow_level_auto_min",
+              "type": "number",
+              "label": {
+                "en": "Automatic minimum",
+                "nl": "Automatisch minimum"
+              },
+              "value": 30,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Lowest flow the box uses in automatic mode, based on its own Duco sensors.",
+                "nl": "Laagste debiet dat de box in automatische modus gebruikt, op basis van eigen Duco-sensoren."
+              }
+            },
+            {
+              "id": "flow_level_auto_max",
+              "type": "number",
+              "label": {
+                "en": "Automatic maximum",
+                "nl": "Automatisch maximum"
+              },
+              "value": 100,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Highest flow the box uses in automatic mode.",
+                "nl": "Hoogste debiet dat de box in automatische modus gebruikt."
+              }
+            },
+            {
+              "id": "time_man",
+              "type": "number",
+              "label": {
+                "en": "Temporary level duration",
+                "nl": "Duur tijdelijke stand"
+              },
+              "value": 15,
+              "min": 5,
+              "max": 720,
+              "step": 5,
+              "units": {
+                "en": "min",
+                "nl": "min"
+              },
+              "hint": {
+                "en": "How long a temporary level (Manual 1/2/3) lasts. The x2 and x3 variants last twice or three times as long.",
+                "nl": "Hoe lang een tijdelijke stand (Tijdelijk 1/2/3) duurt. De x2- en x3-varianten duren twee of drie keer zo lang."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "pair": [
@@ -5240,7 +5578,151 @@
         "large": "/drivers/ducobox-silent-connect/assets/images/large.png",
         "xlarge": "/drivers/ducobox-silent-connect/assets/images/xlarge.png"
       },
-      "id": "ducobox-silent-connect"
+      "id": "ducobox-silent-connect",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Ventilation levels (Connectivity Board)",
+            "nl": "Ventilatiestanden (Connectivity Board)"
+          },
+          "children": [
+            {
+              "id": "flow_max",
+              "type": "label",
+              "label": {
+                "en": "Maximum flow",
+                "nl": "Maximaal debiet"
+              },
+              "value": "-",
+              "hint": {
+                "en": "Maximum flow of the box (100 %), set during calibration with the Duco Installation App. Read-only.",
+                "nl": "Maximaal debiet van de box (100 %), ingesteld bij het inregelen met de Duco Installation App. Alleen-lezen."
+              }
+            },
+            {
+              "id": "flow_level_man1",
+              "type": "number",
+              "label": {
+                "en": "Level 1",
+                "nl": "Stand 1"
+              },
+              "value": 15,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 1 as a percentage of the maximum flow. At most level 2.",
+                "nl": "Debiet van stand 1 als percentage van het maximale debiet. Hoogstens stand 2."
+              }
+            },
+            {
+              "id": "flow_level_man2",
+              "type": "number",
+              "label": {
+                "en": "Level 2",
+                "nl": "Stand 2"
+              },
+              "value": 30,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 2 as a percentage of the maximum flow. Between level 1 and level 3.",
+                "nl": "Debiet van stand 2 als percentage van het maximale debiet. Tussen stand 1 en stand 3."
+              }
+            },
+            {
+              "id": "flow_level_man3",
+              "type": "number",
+              "label": {
+                "en": "Level 3",
+                "nl": "Stand 3"
+              },
+              "value": 100,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Flow of level 3 as a percentage of the maximum flow. At least level 2.",
+                "nl": "Debiet van stand 3 als percentage van het maximale debiet. Minstens stand 2."
+              }
+            },
+            {
+              "id": "flow_level_auto_min",
+              "type": "number",
+              "label": {
+                "en": "Automatic minimum",
+                "nl": "Automatisch minimum"
+              },
+              "value": 30,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Lowest flow the box uses in automatic mode, based on its own Duco sensors.",
+                "nl": "Laagste debiet dat de box in automatische modus gebruikt, op basis van eigen Duco-sensoren."
+              }
+            },
+            {
+              "id": "flow_level_auto_max",
+              "type": "number",
+              "label": {
+                "en": "Automatic maximum",
+                "nl": "Automatisch maximum"
+              },
+              "value": 100,
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "units": {
+                "en": "%",
+                "nl": "%"
+              },
+              "hint": {
+                "en": "Highest flow the box uses in automatic mode.",
+                "nl": "Hoogste debiet dat de box in automatische modus gebruikt."
+              }
+            },
+            {
+              "id": "time_man",
+              "type": "number",
+              "label": {
+                "en": "Temporary level duration",
+                "nl": "Duur tijdelijke stand"
+              },
+              "value": 15,
+              "min": 5,
+              "max": 720,
+              "step": 5,
+              "units": {
+                "en": "min",
+                "nl": "min"
+              },
+              "hint": {
+                "en": "How long a temporary level (Manual 1/2/3) lasts. The x2 and x3 variants last twice or three times as long.",
+                "nl": "Hoe lang een tijdelijke stand (Tijdelijk 1/2/3) duurt. De x2- en x3-varianten duren twee of drie keer zo lang."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "pair": [

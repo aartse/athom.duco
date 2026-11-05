@@ -1,0 +1,19 @@
+{
+    "type": "number",
+    "label": {
+        "en": "Level 2",
+        "nl": "Stand 2"
+    },
+    "value": 30,
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "units": {
+        "en": "%",
+        "nl": "%"
+    },
+    "hint": {
+        "en": "Flow of level 2 as a percentage of the maximum flow. Between level 1 and level 3.",
+        "nl": "Debiet van stand 2 als percentage van het maximale debiet. Tussen stand 1 en stand 3."
+    }
+}

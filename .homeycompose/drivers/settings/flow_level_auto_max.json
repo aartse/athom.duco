@@ -1,0 +1,19 @@
+{
+    "type": "number",
+    "label": {
+        "en": "Automatic maximum",
+        "nl": "Automatisch maximum"
+    },
+    "value": 100,
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "units": {
+        "en": "%",
+        "nl": "%"
+    },
+    "hint": {
+        "en": "Highest flow the box uses in automatic mode.",
+        "nl": "Hoogste debiet dat de box in automatische modus gebruikt."
+    }
+}

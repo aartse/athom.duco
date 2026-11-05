@@ -1,0 +1,56 @@
+{
+    "title": {
+        "en": "Set level flow percentage",
+        "nl": "Stel debiet van stand in"
+    },
+    "titleFormatted": {
+        "en": "Set level [[level]] to [[percentage]] %",
+        "nl": "Zet stand [[level]] op [[percentage]] %"
+    },
+    "hint": {
+        "en": "Changes the flow percentage of a ventilation level on the box (rounded to steps of 5). Requires a Connectivity Board.",
+        "nl": "Past het debietpercentage van een ventilatiestand op de box aan (afgerond op stappen van 5). Vereist een Connectivity Board."
+    },
+    "args": [
+        {
+            "type": "dropdown",
+            "name": "level",
+            "values": [
+                {
+                    "id": "1",
+                    "label": {
+                        "en": "1",
+                        "nl": "1"
+                    }
+                },
+                {
+                    "id": "2",
+                    "label": {
+                        "en": "2",
+                        "nl": "2"
+                    }
+                },
+                {
+                    "id": "3",
+                    "label": {
+                        "en": "3",
+                        "nl": "3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "name": "percentage",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": " %",
+            "labelDecimals": 0,
+            "title": {
+                "en": "Percentage",
+                "nl": "Percentage"
+            }
+        }
+    ]
+}
